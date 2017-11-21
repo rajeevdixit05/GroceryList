@@ -72,12 +72,14 @@ public class ItemsDataSource {
         return itemList;
     }
 
+
     public List<DataItem> getGroceryListItems (String grocerId) {
-        String whereClause = "groceryId = "+grocerId+"";
+        String whereClause = "groceryId=?";
+        String [] whereArgs = {grocerId};
         List<DataItem> itemList = new ArrayList<>();
 
         try {
-            Cursor cursor= mDatabase.query(ItemTable.TABLE_ITEMS, ItemTable.ALL_COLUMNS, whereClause, null, null, null, null );
+            Cursor cursor= mDatabase.query(ItemTable.TABLE_ITEMS, ItemTable.ALL_COLUMNS, whereClause, whereArgs, null, null, null );
             while (cursor.moveToNext()) {
                 DataItem item = new DataItem();
                 item.setItemId(cursor.getString(cursor.getColumnIndex(ItemTable.COLUMN_ID)));

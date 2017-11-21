@@ -49,9 +49,6 @@ public class GroceryListAdapter extends RecyclerView.Adapter<GroceryListAdapter.
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(mContext, "You selected " + item.getItemName(),
-//                        Toast.LENGTH_SHORT).show();
-//                String groceryId = grocery.getGroceryId();
                 Intent intent = new Intent(mContext, AddGroceryListItemsActivity.class);
                 intent.putExtra(GROCERY_KEY, grocery);
                 mContext.startActivity(intent);

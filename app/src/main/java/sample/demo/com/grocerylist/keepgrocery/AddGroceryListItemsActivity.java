@@ -114,6 +114,9 @@ public class AddGroceryListItemsActivity extends AppCompatActivity {
             case R.id.action_add_task:
                 createGroceryList();
                 return true;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

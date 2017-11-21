@@ -43,18 +43,6 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
 
         holder.tvName.setText(item.getItemName());
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Toast.makeText(mContext, "You selected " + item.getItemName(),
-//                        Toast.LENGTH_SHORT).show();
-//                String groceryId = grocery.getGroceryId();
-                Intent intent = new Intent(mContext, AddGroceryListItemsActivity.class);
-                intent.putExtra(ITEM_KEY, item);
-                mContext.startActivity(intent);
-            }
-        });
-
         holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
