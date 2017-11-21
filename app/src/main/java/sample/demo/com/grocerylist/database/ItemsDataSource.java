@@ -72,7 +72,6 @@ public class ItemsDataSource {
         return itemList;
     }
 
-
     public List<DataItem> getGroceryListItems (String grocerId) {
         String whereClause = "groceryId=?";
         String [] whereArgs = {grocerId};

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -68,6 +69,8 @@ public class AddGroceryListItemsActivity extends AppCompatActivity {
             SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
             boolean grid = settings.getBoolean(getString(R.string.pref_display_grid), false);
             RecyclerView recyclerView = (RecyclerView) findViewById(R.id.itemList);
+            recyclerView.addItemDecoration(new DividerItemDecoration(this,
+                    DividerItemDecoration.VERTICAL));
             if (grid) {
                 recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
             }

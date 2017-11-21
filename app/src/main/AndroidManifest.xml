@@ -20,10 +20,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".keepgrocery.GroceryEditorActivity"
-            android:label="@string/title_activity_grocery_editor"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".keepgrocery.AddGroceryListItemsActivity"
             android:label="@string/title_activity_add_grocery_list_items"
             android:theme="@style/AppTheme.NoActionBar"></activity>
