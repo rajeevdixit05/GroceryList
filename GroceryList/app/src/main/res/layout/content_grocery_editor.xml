@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="sample.demo.com.grocerylist.keepgrocery.GroceryEditorActivity"
+    tools:showIn="@layout/activity_grocery_editor">
+
+    <EditText
+        android:id="@+id/grocText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="Add GroceryList..."
+        android:inputType="textImeMultiLine"
+        android:maxLines="1"
+        android:imeOptions="actionDone"
+        android:drawableRight="@mipmap/ic_additem">
+        <requestFocus />
+    </EditText>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/grocText"
+        android:layout_alignParentLeft="true"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp">
+    </ListView>
+
+</RelativeLayout>

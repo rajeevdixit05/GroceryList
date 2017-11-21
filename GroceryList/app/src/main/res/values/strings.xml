@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GroceryList</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_grocery_editor">GroceryEditorActivity</string>
+    <string name="delete">Delete Grocery List</string>
+    <string name="edit">Edit Grocery List</string>
+    <string name="add">Add Items</string>
+    <string name="title_activity_add_grocery_list_items">AddGroceryListItemsActivity</string>
+    <string name="pref_display_grid">pref_display_grid</string>
+</resources>

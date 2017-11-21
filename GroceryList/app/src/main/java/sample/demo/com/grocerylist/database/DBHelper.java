@@ -1,0 +1,34 @@
+package sample.demo.com.grocerylist.database;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+/**
+ * Created by rajeev on 20/11/17.
+ */
+
+public class DBHelper extends SQLiteOpenHelper {
+    public static final String DB_NAME = "groceryList.db";
+    public static final int DB_VERSION = 1;
+
+    public DBHelper(Context context) {
+        super(context, DB_NAME, null,  DB_VERSION);
+    }
+
+
+    @Override
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        sqLiteDatabase.execSQL(GroceryTable.SQL_CREATE);
+        sqLiteDatabase.execSQL(ItemTable.SQL_CREATE);
+
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        sqLiteDatabase.execSQL(GroceryTable.SQL_DELETE);
+        sqLiteDatabase.execSQL(ItemTable.SQL_DELETE);
+        onCreate(sqLiteDatabase);
+    }
+}
