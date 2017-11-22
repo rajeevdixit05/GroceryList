@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +49,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
         final DataItem item = mItem.get(position);
 
         holder.tvName.setText(item.getItemName());
-
+        if (item.getStatus()==1) {holder.tvName.setTextColor(Color.RED);}
         holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -61,8 +62,6 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
                 builder.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int item1) {
-                        Toast.makeText(mContext, "You clicked " + item.getItemName(),
-                                Toast.LENGTH_SHORT).show();
                         mItemSource= new ItemsDataSource(mContext);
                         mItemSource.open();
                         switch (item1) {
@@ -86,6 +85,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
                 return true;
             }
         });
+
     }
 
     public interface ItemListAdapterCallback {
