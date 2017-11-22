@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteException;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
@@ -13,8 +14,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -32,11 +36,13 @@ import sample.demo.com.grocerylist.database.ItemsDataSource;
 import sample.demo.com.grocerylist.model.DataItem;
 import sample.demo.com.grocerylist.model.GroceryItem;
 
-public class AddGroceryListItemsActivity extends AppCompatActivity {
+public class AddGroceryListItemsActivity extends AppCompatActivity implements ItemListAdapter.ItemListAdapterCallback {
     ItemsDataSource mItemSource;
     List<String> dataItem;
     List<DataItem> itemList;
     GroceryItem groceryItem;
+    DataItem dataItems;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +81,8 @@ public class AddGroceryListItemsActivity extends AppCompatActivity {
                 recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
             }
 
+//            recyclerView.setAlpha(1);
+//            recyclerView.setBackgroundColor(Color.LTGRAY);
             recyclerView.setAdapter(adapter);
         }
 
@@ -89,13 +97,18 @@ public class AddGroceryListItemsActivity extends AppCompatActivity {
                 .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        DataItem item= new DataItem(null,String.valueOf(taskEditText.getText()),groceryItem.getGroceryId());
-                        try {
-                            mItemSource.createItemList(item);
-                        } catch (SQLiteException e) {
-                            e.printStackTrace();
+                        if (taskEditText.getText().toString().isEmpty()) {
+                            Toast.makeText(getApplicationContext(),"Can't add empty item",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            DataItem item = new DataItem(null, String.valueOf(taskEditText.getText()), groceryItem.getGroceryId(), 0);
+                            try {
+                                mItemSource.createItemList(item);
+                            } catch (SQLiteException e) {
+                                e.printStackTrace();
+                            }
+                            updateItemsList();
                         }
-                        updateItemsList();
                     }
                 })
                 .setNegativeButton("Cancel", null)
@@ -126,4 +139,8 @@ public class AddGroceryListItemsActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void refreshDisplay() {
+        updateItemsList();
+    }
 }

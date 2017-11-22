@@ -65,7 +65,6 @@ public class GroceryDataSource {
     public List<GroceryItem> getAllItems () {
         List<GroceryItem> groceryList = new ArrayList<>();
         Cursor cursor= mDatabase.query(GroceryTable.TABLE_ITEMS, GroceryTable.ALL_COLUMNS, null, null, null, null, null );
-        Log.d("Cursor","here: "+cursor.moveToNext());
         while (cursor.moveToNext()) {
             GroceryItem item = new GroceryItem();
             item.setGroceryId(cursor.getString(cursor.getColumnIndex(GroceryTable.COLUMN_ID)));

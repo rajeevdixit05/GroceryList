@@ -17,6 +17,9 @@ public class DataItem implements Parcelable {
     private String itemId;
     private String itemName;
     private String groceryId;
+    private int status;
+
+
 
     public String getItemId() {
         return itemId;
@@ -42,24 +45,30 @@ public class DataItem implements Parcelable {
         this.groceryId = itemCategory;
     }
 
+    public int getStatus() { return status; }
+
+    public void setStatus(int status) { this.status = status; }
+
     public DataItem () {
 
     }
 
-    public DataItem(String itemId, String itemName, String groceryId) {
+    public DataItem(String itemId, String itemName, String groceryId, int status) {
         if (itemId==null) {
             itemId= UUID.randomUUID().toString().replaceAll("[^a-zA-z0-9" + "]","");
         }
         this.itemId = itemId;
         this.itemName = itemName;
         this.groceryId = groceryId;
+        this.status = status;
     }
 
     public ContentValues toValues() {
-        ContentValues values= new ContentValues(3);
+        ContentValues values= new ContentValues(4);
         values.put(ItemTable.COLUMN_ID,itemId);
         values.put(ItemTable.COLUMN_NAME,itemName);
         values.put(ItemTable.COLUMN_GROCERY_ID,groceryId);
+        values.put(ItemTable.COLUMN_STATUS,status);
         return values;
     }
 
@@ -73,12 +82,14 @@ public class DataItem implements Parcelable {
         dest.writeString(this.itemId);
         dest.writeString(this.itemName);
         dest.writeString(this.groceryId);
+        dest.writeInt(this.status);
     }
 
     protected DataItem(Parcel in) {
         this.itemId = in.readString();
         this.itemName = in.readString();
         this.groceryId = in.readString();
+        this.status = in.readInt();
     }
 
     public static final Parcelable.Creator<DataItem> CREATOR = new Parcelable.Creator<DataItem>() {
@@ -99,6 +110,7 @@ public class DataItem implements Parcelable {
                 "itemId='" + itemId + '\'' +
                 ", itemName='" + itemName + '\'' +
                 ", groceryId='" + groceryId + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

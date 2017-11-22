@@ -16,6 +16,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.View;
 import android.view.Menu;
@@ -81,7 +82,7 @@ public class GroceryListActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL));
         if (grid) {
-            recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 0));
         }
 
         recyclerView.setAdapter(adapter);
@@ -96,13 +97,18 @@ public class GroceryListActivity extends AppCompatActivity {
                 .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        GroceryItem grocery= new GroceryItem(null,String.valueOf(taskEditText.getText()));
+                        if (taskEditText.getText().toString().isEmpty()) {
+                            Toast.makeText(getApplicationContext(),"Can't add empty item",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            GroceryItem grocery = new GroceryItem(null, String.valueOf(taskEditText.getText()));
                             try {
                                 mDataSource.createGroceryList(grocery);
                             } catch (SQLiteException e) {
                                 e.printStackTrace();
                             }
-                        refreshDisplay();
+                            refreshDisplay();
+                        }
                     }
                 })
                 .setNegativeButton("Cancel", null)

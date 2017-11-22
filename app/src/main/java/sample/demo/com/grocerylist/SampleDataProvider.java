@@ -32,10 +32,10 @@ public class SampleDataProvider {
         addItem(new GroceryItem("1", "Grocery 4 "));
         addItem(new GroceryItem("1", "Grocery 5 "));
 
-        addItem(new DataItem(null, "Fan", "1"));
-        addItem(new DataItem(null, "Refrigerator ", "2"));
-        addItem(new DataItem(null, "Bulb ", "2"));
-        addItem(new DataItem(null, "Iron ", "2"));
+        addItem(new DataItem(null, "Fan", "1",0));
+        addItem(new DataItem(null, "Refrigerator ", "2",0));
+        addItem(new DataItem(null, "Bulb ", "2",0));
+        addItem(new DataItem(null, "Iron ", "2",0));
     }
 
     private static void addItem(GroceryItem item) {

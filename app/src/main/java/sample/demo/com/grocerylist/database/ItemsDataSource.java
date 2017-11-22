@@ -42,6 +42,22 @@ public class ItemsDataSource {
         mDatabase.insert(ItemTable.TABLE_ITEMS, null, values);
         return dataItem;
     }
+
+    public void deleteItemList (DataItem dataItem) {
+//        ContentValues values = dataItem.toValues();
+        String whereClause = "itemId=?";
+        String id= dataItem.getItemId();
+        String [] whereArgs = {id};
+        mDatabase.delete(ItemTable.TABLE_ITEMS, whereClause,whereArgs);
+    }
+
+    public void updateItemList (DataItem dataItem) {
+        ContentValues values = dataItem.toValues();
+        String whereClause = "itemId=?";
+        String id= dataItem.getItemId();
+        String [] whereArgs = {id};
+        mDatabase.update(ItemTable.TABLE_ITEMS, values, whereClause,whereArgs);
+    }
     public long getItemListCount() {
         return DatabaseUtils.queryNumEntries(mDatabase,ItemTable.TABLE_ITEMS);
     }
@@ -67,6 +83,7 @@ public class ItemsDataSource {
             item.setItemId(cursor.getString(cursor.getColumnIndex(ItemTable.COLUMN_ID)));
             item.setItemName(cursor.getString(cursor.getColumnIndex(ItemTable.COLUMN_NAME)));
             item.setGroceryId(cursor.getString(cursor.getColumnIndex(ItemTable.COLUMN_GROCERY_ID)));
+            item.setGroceryId(cursor.getString(cursor.getColumnIndex(ItemTable.COLUMN_STATUS)));
             itemList.add(item);
         }
         return itemList;
@@ -84,6 +101,7 @@ public class ItemsDataSource {
                 item.setItemId(cursor.getString(cursor.getColumnIndex(ItemTable.COLUMN_ID)));
                 item.setItemName(cursor.getString(cursor.getColumnIndex(ItemTable.COLUMN_NAME)));
                 item.setGroceryId(cursor.getString(cursor.getColumnIndex(ItemTable.COLUMN_GROCERY_ID)));
+                item.setStatus(cursor.getInt(cursor.getColumnIndex(ItemTable.COLUMN_STATUS)));
                 itemList.add(item);
             }
         } catch (SQLiteException e) {

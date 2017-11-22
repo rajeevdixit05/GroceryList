@@ -9,14 +9,16 @@ public class ItemTable {
     public static final String COLUMN_ID = "itemId";
     public static final String COLUMN_NAME = "itemName";
     public static final String COLUMN_GROCERY_ID = "groceryId";
+    public static final String COLUMN_STATUS = "status";
     public static final String[] ALL_COLUMNS=
-            {COLUMN_ID, COLUMN_NAME, COLUMN_GROCERY_ID };
+            {COLUMN_ID, COLUMN_NAME, COLUMN_GROCERY_ID, COLUMN_STATUS };
 
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_ITEMS + "(" +
                     COLUMN_ID + " TEXT," +
                     COLUMN_NAME + " TEXT, " +
-                    COLUMN_GROCERY_ID + " TEXT" +
+                    COLUMN_GROCERY_ID + " TEXT, " +
+                    COLUMN_STATUS + " flag INTEGER DEFAULT 0" +
                     ");";
 
     public static final String SQL_DELETE =
